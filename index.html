@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+  <style>
+    .task-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #ccc;
+      font-size: 18px;
+    }
+
+    .green {
+      background-color: green;
+      color: white;
+    }
+
+    .yellow {
+      background-color: yellow;
+    }
+
+    .red {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <input type="number" id="user-input" min="1" max="30" placeholder="Enter a number (1-30)" oninput="generateList()">
+  <ul id="task-list" class="task-list"></ul>
+
+  <script>
+    function generateList() {
+      // Get the user input value
+      const userInput = document.getElementById('user-input').value;
+
+      // Validate the input
+      if (userInput >= 1 && userInput <= 30) {
+        // Get the task list element
+        const taskList = document.getElementById('task-list');
+
+        // Clear the previous list
+        taskList.innerHTML = '';
+
+        // Loop from 1 to the user input value
+        for (let i = 1; i <= userInput; i++) {
+          // Create a new task item
+          const taskItem = document.createElement('li');
+          taskItem.classList.add('task-item');
+          taskItem.textContent = `Task ${i}`;
+
+          // Add the appropriate class based on the number range
+          if (i >= 1 && i <= 10) {
+            taskItem.classList.add('green');
+          } else if (i >= 11 && i <= 20) {
+            taskItem.classList.add('yellow');
+          } else if (i >= 21 && i <= 30) {
+            taskItem.classList.add('red');
+          }
+
+          // Append the task item to the task list
+          taskList.appendChild(taskItem);
+        }
+      } else {
+        // Clear the task list if the input is invalid
+        const taskList = document.getElementById('task-list');
+        taskList.innerHTML = '';
+      }
+    }
+  </script>
+</body>
+</html>
